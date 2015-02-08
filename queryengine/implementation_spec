@@ -1,0 +1,9 @@
+The query engine requires one new data structure to be coded:
+
+struct stack
+{
+	void *stack;
+	int top;
+}
+
+This is a standard stack implemented as an array, supporting the push and pop operations. 

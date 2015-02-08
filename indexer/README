@@ -1,0 +1,7 @@
+I'm all tired out from coding this one, so I'm keeping this README short. usage information and a bit of data structure info are available in the implemntation_spec and design_spec. Important things to note:
+
+1) My indexer identifies documents by URL, not document ID. I chose to use my integer member of my DNODEs to store word frequency and didn't want to add another member to keep track of the ID. As a workaround (and arguably more elegant solution) I will store the ID into the dictionary produced by crawler and save that data structure to a file. I plan to implement the PageRank algorithm using that dictionary as web graph.
+
+2) When I rebuild the data structres from a .dat file, all linked lists are reversed from the original because they are singly linked. The data is identical, however, as you can tell by comparing the file sizes of the original index data file and the rebuilt one. A more conclusive test is rebuilding the index twice, which creates an index file identical to the original.
+
+As always, please do not hesitate to contact me if you have any questions. My documentation isn't so great on this one, so I'll be more than happy to explain things through blitz of phone ((734) 673-9284). On a final note, please check my program for memory leaks. You should find none.

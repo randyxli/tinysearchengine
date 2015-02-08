@@ -1,0 +1,5 @@
+Nothing too unusual here. The most unusual thing is the ranking algorithm I use. Instead of just relying on word frequencies to rank, I multiply those frequencies by the number of links to the page. The link info comes from a graph created by the crawler upon it's exit.
+
+To use the query engine, simply run the script test_query.sh and wait for the program to prompt you for a query. The query supports the AND and OR operators, which behave as described on the lab webpage.
+
+The query engine introduces relatively little new code. Most of the new code is in query.c. Most of the other new code is in linkedlist.c, which was extended to support needed linked list operations such as OR, AND, and copying a linked list. The parsing algorithm is extremely ugly. In hindsight I should've implemented the necessary stack functions so I can use more elegant and extensible algorithms.

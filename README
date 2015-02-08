@@ -1,0 +1,1 @@
+Finally, the conclusion of the Tiny Search Engine! To run it, simply run the bash script test_tse.sh. It will run all three modules. The crawling takes a long time, especially at depth 3, so you might want to find something else to do while you wait. Please let me know if you have any questions!

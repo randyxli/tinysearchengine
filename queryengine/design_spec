@@ -1,0 +1,13 @@
+1) Inputs
+
+To execute the query engine, the path of the inverted list data file must be given on the command line.
+
+The query engine should prompt the user for a query in the command line. The user must be able to search for keywords, with the operators OR and AND supported.
+
+2) Outputs
+
+The query engine  will return a list of URLs that pertain to the query, where each URL is ranked by the number of pages that link to it and the number of occurrences of the keywords.
+
+3) Data Flow
+
+First, the query engine will reconstruct the inverted word list from the path it is given. Afterwards, the user will be prompted for a query. Once it is entered, the query will be processed into a form that the computer can understand, and then all of the URLs associated with each of the keywords will be looked up in the inverted word list. AND and OR operations will be performed upon these lists until the final list of URLs is obtained, and then the list is fed into the ranking algorithm and displayed to the user.

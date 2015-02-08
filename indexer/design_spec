@@ -1,0 +1,26 @@
+Inputs
+
+./indexer [DIRECTORY WHERE WEBPAGES ARE SAVED]
+
+OR
+
+./indexer [INDEX FILE]
+
+[DIRECTORY WHERE WEBPAGES ARE SAVED]
+Description: This is the full path to the directory where the webpages obtained by the crawler are saved.
+Requirement: The directory must be valid and must contain sequentially numbered .html files.
+Usage: The user will be informed if the directory is invalid or if no filenames in the form of n.html, where n is an non-negative integer, are found in the directory.
+
+[INDEX FILE]
+Description: This is the path to a file created by this indexer that contains all the data needed to recreate previously created data structures.
+Requirement: The file specified by the path must exist and must end in .dat.
+
+Output
+
+A file ending in .dat that has sufficient data to completely recreate the inverted list that the file was based off of.
+
+Data Flow
+
+The indexer starts by retrieving the text of a file inside the webpage repository. The string is then parsed for words, throwing away HTML tags, punctuation, and converting all letters to lower case. Whenever a word is parsed, a DocumentNode is created and added to the corresponding WordNode in the dictionary. If the word is not yet in the dictionary, then a new WordNode is created, and both the WordNode and DocumentNode are added. After the entire page has been parsed, then the indexer retrieves another file from the webpage repository and the process repeats. When the indexer is done, it will create a .dat file and save all the data inside of it. The first line of the file will contain the number of hash slots in the dictionary. Each slot in the hash table will get a separate line in the file. In each line, the first WordNode is printed, followed by all the DocumentNodes attached to it, and then seconde WordNode is printed, followed by all the DocumentNodes attached to it. WordNodes will be marked by a special character to differentiate the next WordNode in a line from another DocumentNode. This procees is continued until the whole dictionary has been saved.
+
+If a .dat file is given as an argument, then the indexer will parse through the file until the dictionary has been recreated. It will first create a new hash table with the size specified on the first line. Whenever the parser sees a newline character, indexer will know to move onto the next hash slot. A new WordNode is marked by a special character, perhaps @, and DocumentNodes will be marked by a distinct one, such as #. Each member of a structure will be delimited by spaces. After it is done recreating the dictionary, the parse will then repackage it into a .dat file of a different name.

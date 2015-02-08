@@ -1,0 +1,29 @@
+This is Randy Li's web crawler, aka Lab 4 for Computer Science 50. It contains the following source files: crawler.c, crawler.h, dictoinary.c, hash.c, hash.h, header.h, html.c, html.h, and wget.sh. It also contains this README file, along with a Makefile and a diagram of my dictionary data structure.
+
+The crawler functions follows most of the requirements and to the lay-person functions exactly like the proposed solution. However, the implementation is quite different. As a result, meeting the requirements that are actually implementation specs (the ones involving URLsList and visited) did not contribute to the desired functionality.
+
+The fundamental difference between my implementation and the implementation spec is the following principle: a URL is in the dictionary if and only if it has been visited (page associated with the URL has been downloaded). By following this principle, I altered the data structures quite a bit. In the following content, I will enumerate and explain all my data structures and how they differ from the implementation spec.
+
+1) URL_NODE: Mostly the same as the implementation spec, except I discarded member int visited. Since all URLs in the dictionary must be visited, the member is no longer necessary.
+
+2) DNODE: Despite its name, my implementation of DNODE is a singly linked list node, not a doubly linked list node. As such, the member DNODE *prev was deleted. Furthermore, the member int depth for the convenience of implementating my queue. The reason for this implementation will become clear shortly.
+
+3) Queue: I implement a queue with my DNODEs to hold all the unvisited URLs. As you may recall, the implementation spec relies on the doubly linked list to find the next unvisited URL. That method, however, is O(n) for finding the next unvisited URL and also O(n) for inserting a new unvistied URL into the list (I will admit that in this assignment n is small). My implementation is O(1) for both of those operations, making it far superior for keeping track of unvisited URLs.
+
+4) DICTIONARY: Since I have a separate data structure to keep track of all unvisited URLs, I have no reason to link the visited ones that are in the DICTIONARY in one giant linked list. Instead, I create a separate linked list for each hash slot (see diagram.png). In other words, two DNODEs are in the same linked list if and only if the two nodes hash to the same value.
+
+Of course, different data structures lead to different algorithms and functions. I have documented the functions in my source files thoroughly, so in this document I will talk about the functions I discarded from the implementation spec.
+
+1) int initLists();
+Since I keep my unvisited URLs in a queue, I do not need a dictionary with something inside of it to get my algorithm running. The only initialization I need is a calloc for my dictionary, which does not deserve it's own function. A corollary of this design is that I do not need to bootstrap, which makes my code more compact.
+
+2) void updateListLinkToBeVisited(char **url_list, int depth)
+I'm especially glad I could get rid of this one since it's such a pain to type. My queue makes this function irrelevant. Adding new links to the queue is done inside extractURLsLL.
+
+3) void setURLasVisited(char *url)
+Hmmm, why don't I have this function again? Oh right, I don't have a int visited member in my URLNODEs. Moving on.
+
+4) char *getAddressFromTheLinksToBeVisited(int *depth)
+Once again, I have a queue to keep track of URLs to be visited. I was going to call my equivalent function dq, but I felt guilty about all the exercising my fingers will miss by not implementing getAddressFromTheLinksToBeVisited, so I instead named it dequeue.
+
+I hope my documentation helped you understand my program, because if it did not, I wasted both of our time. Please contact me at randy.x.li@dartmouth.edu if you have any questions.
